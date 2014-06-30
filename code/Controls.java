@@ -10,7 +10,6 @@ import java.awt.GridLayout;
 import java.awt.Scrollbar;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -44,6 +43,11 @@ public class Controls extends JPanel{
 		stop = stp;
 		right = r;
 		left = l;
+		pause.setToolTipText("Pauza");
+		play.setToolTipText("Start/Wznów");
+		stop.setToolTipText("Stop");
+		right.setToolTipText("W prawo");
+		left.setToolTipText("W lewo");
 		
 		startingSign = new JTextField(3); 
 		
@@ -94,7 +98,7 @@ public class Controls extends JPanel{
 	}
 	
 	public void setSpeedDisplay(int s){
-		int txt = (s <= 2 ? 99 : (s == 60 ? 1 : 60-s));
+		int txt = (s <= 2 ? 99 : (s == 60 ? 1 : (60-s)/10));
 		speed.setText((txt<10 ? " " : "") + (txt == 99 ? "++" : txt));
 	}
 	
