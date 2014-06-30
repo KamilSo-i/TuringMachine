@@ -3,14 +3,11 @@ package turing;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.*;
 
-
 public class TableCopy extends JPanel{
-	int alphQty;
 	public int stateQty;
 	static boolean notFirstTable = false;
 	ArrayList<Character> alphabet = new ArrayList<>();
@@ -51,9 +48,9 @@ public class TableCopy extends JPanel{
 			tabData = new Object[stateQty][alphabet.size()*3];
 		}else{
 			Object[][] temp = {
-				{'M', 2, 'R', 'D', 0, 'L', 'X', 1, ' '},
-				{'X', 0, 'L', 'D', 2, 'R', 'M', 0, ' '},
-				{'X', 2, 'L', 'X', 1, 'R', 'X', 2, 'L'}};
+					{'M', 2, 'R', 'D', 0, 'L', 'X', 1, ' '},
+					{'X', 0, 'L', 'D', 2, 'R', 'M', 0, ' '},
+					{'X', 2, 'L', 'X', 1, 'R', 'X', 2, 'L'}};
 			tabData = temp;
 		}
 		//
