@@ -39,8 +39,8 @@ public class MainWin extends JFrame implements ActionListener, AdjustmentListene
 	static MenuItem moveRight;
 	static MenuItem moveLeft;
 	static Controls controls;
-	MenuBar mbar;
 	static Tape tape;
+	MenuBar mbar;
 	
 	MainWin(String s){
 		super(s);
@@ -190,13 +190,13 @@ public class MainWin extends JFrame implements ActionListener, AdjustmentListene
 				break;
 			case "O programie":
 				JOptionPane.showMessageDialog(this, 
-						"Turing Machine v. 0.99\nAutor: Kamil Socha", 
+						"Turing Machine v. 0.99\nAutor:   Kamil Socha", 
 						"O programie", JOptionPane.INFORMATION_MESSAGE);
 				break;
 			case "Objaśnienia symboli":
 				JOptionPane.showMessageDialog(this, 
 						"So      odczytany znak"
-						+ "\nq0      odczytany stan"
+						+ "\nq0      aktualny stan"
 						+ "\nS1      nowy znak"
 						+ "\nq1      nowy stan (liczba)"
 						+ "\nL/R/-  ruch głowicy w lewo/prawo/brak", 
