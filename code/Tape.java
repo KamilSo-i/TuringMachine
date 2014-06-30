@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.AdjustmentEvent;
 import java.lang.Runnable;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -43,9 +41,8 @@ public class Tape extends JPanel implements Runnable{
 	char tempSign;
 	char tempMotion;	
 	
-	String napis = "procedura zakończona";
+	String infoTxt = "program zakończony";
 	boolean isEnded = false;
-	int stanOdczytany;
 	
 	public Tape(){
 		setPreferredSize(new Dimension(400, 240));
@@ -237,7 +234,7 @@ public class Tape extends JPanel implements Runnable{
 					procedureStarted();
 					while(true){
 						if(stopProcedure || state == -1){
-							napis = "program zakończony" + (state == -1 ? ": stan spoza zakresu" : "");
+							infoTxt = "program zakończony" + (state == -1 ? ": stan spoza zakresu" : "");
 							stopProcedure = false;
 							break;
 						}
@@ -246,13 +243,11 @@ public class Tape extends JPanel implements Runnable{
 							sign[marker] = symbol[state][indexOfSymbol(sign[marker])]; //zmiana znaku
 							repaint();
 							Thread.sleep(200);
-							tempState = state;
-							stanOdczytany = 
+							tempState = state; 
 							MainWin.controls.startingState = 
 							state = stateTab[tempState][indexOfSymbol(tempSign)]; //zmiana stanu 
 							
 							if(state > states && state < 0){ //jeżeli nowy stan nie miesci sie w zakeresie - przerwij
-								//procedureEnded();
 								break;
 							}
 							
@@ -271,7 +266,7 @@ public class Tape extends JPanel implements Runnable{
 
 							if((stopProcedure) && countTo100 >= 100){ //aby program nie czekał przy przerywaniu
 								countTo100 = 0;
-								//napis = "";
+								//infoTxt = "";
 								stopProcedure = false;
 								//procedureEnded();
 								break;
@@ -283,7 +278,7 @@ public class Tape extends JPanel implements Runnable{
 								Thread.sleep(60*q);
 							}
 						}catch(ArrayIndexOutOfBoundsException e){
-							napis = "program zakończony: alfabet nie zawiera znaku \"" + tempSign +"\"";
+							infoTxt = "program zakończony: alfabet nie zawiera znaku \"" + tempSign +"\"";
 							stopProcedure = true;
 							break;
 						}
@@ -328,17 +323,12 @@ public class Tape extends JPanel implements Runnable{
 		g.fillRect(arrowX[1]+25, 12, 5, 66);
 		g.fillRect(arrowX[1]-29, 11, 59, 5);
 		g.fillRect(arrowX[1]-29, 75, 59, 5);
-		if(isEnded) g.drawString(napis, 10, 175);
+		if(isEnded) g.drawString(infoTxt, 10, 175);
 		g.setColor(Color.BLACK);
-		//g.drawString("marker: "+marker, mid+300, 200);
 		g.drawString("S0: "+tempSign, 10, 225);
-		g.drawString("q0: "+stanOdczytany, 150, 225);
-		g.drawString("q1: "+state, 290, 225);
-		g.drawString("L/R: "+tempMotion, 430, 225);
-		g.fillPolygon(arrowX, arrowY, 5); //strzalka
-		/*g.drawString("startingState: "+MainWin.controls.startingState, 550, 205);
-		g.drawString("table.stateQty: "+MainWin.table.stateQty, 550, 180);
-		g.drawString("tape.state: "+MainWin.tape.state, 550, 230);*/
+		g.drawString("q0: "+state, 150, 225);
+		g.drawString("L/R: "+tempMotion, 290, 225);
+		g.fillPolygon(arrowX, arrowY, 5); //marker
 		g.setColor(Color.WHITE);
 		g.drawString(""+state, (state < 10 && state >= 0 ? arrowX[1]-7 : arrowX[1]-14), 115);
 	}
@@ -397,7 +387,9 @@ public class Tape extends JPanel implements Runnable{
 		symbol = new char[states][size];
 		for(int i=0; i<states; i++){
 			for(int j=0; j<size; j++){
-				str = MainWin.table.tab.getValueAt(i, j*3).toString();
+				str = (MainWin.table.tab.getValueAt(i, j*3) == null 
+						? "" 
+						: MainWin.table.tab.getValueAt(i, j*3).toString());
 				symbol[i][j] = str.length() > 0 ? str.charAt(0) : ' ';
 			}
 		}
@@ -409,7 +401,9 @@ public class Tape extends JPanel implements Runnable{
 		for(int i=0; i<states; i++){
 			for(int j=0; j<size; j++){
 				try{
-					value = (int) MainWin.table.tab.getValueAt(i, j*3+1);
+					value = (MainWin.table.tab.getValueAt(i, j*3+1) == null 
+							? -1 
+							: (int) MainWin.table.tab.getValueAt(i, j*3+1));
 					stateTab[i][j] = value > states || value < 0 ? -1 : value;
 				}catch(ClassCastException e){
 					stateTab[i][j] = -1;
@@ -423,7 +417,10 @@ public class Tape extends JPanel implements Runnable{
 		motion = new char[states][size];
 		for(int i=0; i<states; i++){
 			for(int j=0; j<size; j++){
-				motion[i][j] = (char) MainWin.table.tab.getValueAt(i, j*3+2);
+				ch = MainWin.table.tab.getValueAt(i, j*3+2) == null
+						? ' '
+						: (char) MainWin.table.tab.getValueAt(i, j*3+2);
+				motion[i][j] = ch;
 			}
 		}
 	}
