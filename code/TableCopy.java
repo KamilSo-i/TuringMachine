@@ -50,9 +50,10 @@ public class TableCopy extends JPanel{
 		if(notFirstTable){
 			tabData = new Object[stateQty][alphabet.size()*3];
 		}else{
-			Object[][] temp = {{'M', 2, 'R', 'D', 0, 'L', 'X', 1, ' '},
-								{'X', 0, 'L', 'D', 2, 'R', 'M', 0, ' '},
-								{'X', 2, 'L', 'X', 1, 'R', 'X', 2, 'L'}};
+			Object[][] temp = {
+				{'M', 2, 'R', 'D', 0, 'L', 'X', 1, ' '},
+				{'X', 0, 'L', 'D', 2, 'R', 'M', 0, ' '},
+				{'X', 2, 'L', 'X', 1, 'R', 'X', 2, 'L'}};
 			tabData = temp;
 		}
 		//
