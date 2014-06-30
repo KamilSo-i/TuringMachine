@@ -195,7 +195,11 @@ public class MainWin extends JFrame implements ActionListener, AdjustmentListene
 				break;
 			case "Objaśnienia symboli":
 				JOptionPane.showMessageDialog(this, 
-						"So      odczytany znak\nq0      odczytany stan\nS1      nowy znak\nq1      nowy stan (liczba)\nL/R/-  ruch głowicy w lewo/prawo/brak", 
+						"So      odczytany znak"
+						+ "\nq0      odczytany stan"
+						+ "\nS1      nowy znak"
+						+ "\nq1      nowy stan (liczba)"
+						+ "\nL/R/-  ruch głowicy w lewo/prawo/brak", 
 						"Objaśnienia symboli", JOptionPane.INFORMATION_MESSAGE);
 				break;
 		}
