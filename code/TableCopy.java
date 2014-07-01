@@ -129,7 +129,6 @@ public class TableCopy extends JPanel{
 	    Color color = scroll.getBackground();
 	    rowHeader.setBackground(color);
 	    this.add(scroll, BorderLayout.CENTER);
-	    //revalidate();
 	}
 
 	String[] states(){
